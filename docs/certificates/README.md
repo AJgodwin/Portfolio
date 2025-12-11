@@ -1,0 +1,1 @@
+This helper file was used during setup and is no longer needed.
