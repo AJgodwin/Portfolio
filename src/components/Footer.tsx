@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   const socialLinks = [
@@ -34,14 +35,23 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase()}`}
-                    className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
+              {[
+                { name: 'Home', to: '/' },
+                { name: 'Education', to: '/education' },
+                { name: 'Projects', to: '/projects' },
+                { name: 'Contact', to: '/contact' },
+              ].map((item) => (
+                <li key={item.name}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `text-gray-400 hover:text-blue-400 transition-colors text-sm ${
+                        isActive ? 'text-blue-400' : ''
+                      }`
+                    }
                   >
-                    {link}
-                  </a>
+                    {item.name}
+                  </NavLink>
                 </li>
               ))}
             </ul>

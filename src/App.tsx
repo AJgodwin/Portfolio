@@ -1,27 +1,24 @@
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Education from './components/Education';
-import Highlights from './components/Highlights';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import BackgroundFX from './components/BackgroundFX';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import EducationPage from './pages/EducationPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <BackgroundFX />
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Education />
-      <Highlights />
-      <Projects />
-      <Contact />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/education" element={<EducationPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
       <Footer />
       <ScrollToTop />
     </div>

@@ -14,15 +14,27 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        throw new Error(data?.error || 'Failed to send');
+      }
 
-    setTimeout(() => {
-      setIsSuccess(false);
+      // success: clear inputs and show confirmation
       setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+      setIsSuccess(true);
+    } catch (err) {
+      alert('Sorry, sending failed. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setIsSuccess(false), 3000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
